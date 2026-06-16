@@ -4,18 +4,25 @@ nums2=[1,2,3,6,7,8,9]
 def sols(num1,num2):
     i=0
     j=0
-    nums3=[]
-    if len(num1)>len(num2):
-        smaller= len(num2)
-    else:
-        smaller=len(num1)
-
-    for i in range(smaller):
-        if nums1[i]<nums2[i]:
-            nums3.append(nums1[i])
+    result=[]
+    while(i<len(num1) and j<len(num2)):
+        if nums1[i]<=nums2[j]:
+            if len(result)==0 or result[-1]!=nums1[i]:
+                result.append(nums1[i])
+            i+=1
         else:
-            if nums2[i] not in nums3:
-                nums3.append(nums2[i])
-    return nums3
+            if len(result)==0 or result[-1]!=nums2[j]:
+                result.append(nums2[j])
+            j+=1
+    while i<len(nums1):
+        if len(result)==0 or result[-1]!=nums1[i]:
+                result.append(nums1[i])
+        i+=1
+    while j<len(nums2):
+        if len(result)==0 or result[-1]!=nums2[j]:
+                result.append(nums2[j])
+        j+=1
+
+    return result
 
 print(sols(nums1,nums2))
